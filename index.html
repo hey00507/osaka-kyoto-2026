@@ -4,139 +4,144 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#16130f" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#D92643">
 <title>오사카·교토 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{
-  --bg:#f6f1e7; --card:#fffdf8; --ink:#231d16; --sub:#6d6253; --line:#e4dbc9;
-  --accent:#c8402a; --accent-ink:#fff; --soft:#f1e7d6;
-  --ok:#2f7d4f; --ok-bg:#e3f1e7; --todo:#b3401f; --todo-bg:#fbe5dc; --opt:#8a6a12; --opt-bg:#f8edc9;
-  --shadow:0 1px 2px rgba(60,40,10,.06),0 8px 24px -12px rgba(60,40,10,.18);
+  --bg:#fff; --surface:#f4f5f7; --ink:#14171a; --sub:#5b6470; --line:#e1e4e8;
+  --link:#1b3a8c; --on-day:#fff; --day:#D92643;
+  --ok:#1a7f4b; --todo:#c2261f; --opt:#8a6a00;
+  --display:"Do Hyeon","Pretendard Variable",sans-serif;
+  --body:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
 }
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#16130f; --card:#201c16; --ink:#f1eadc; --sub:#a99c87; --line:#352e24;
-    --accent:#ee6a4d; --accent-ink:#1a0e09; --soft:#2a241b;
-    --ok:#7fd3a0; --ok-bg:#1c3326; --todo:#ff9a7c; --todo-bg:#40211a; --opt:#e6c766; --opt-bg:#3a3016;
-    --shadow:0 1px 2px rgba(0,0,0,.4);
-  }
+:root[data-theme="dark"]{
+  --bg:#101214; --surface:#1a1d21; --ink:#f2f4f6; --sub:#a3acb8; --line:#2c3138;
+  --link:#9db6ff; --ok:#6fd39b; --todo:#ff8f86; --opt:#e3c257;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;
-  padding-bottom:calc(72px + env(safe-area-inset-bottom));word-break:keep-all}
-a{color:inherit}
-.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);word-break:keep-all;
+  padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+a{color:var(--link)}
+button{font:inherit;color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
 
-header.hero{padding:calc(28px + env(safe-area-inset-top)) 0 22px}
-.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--accent);font-weight:700}
-h1{font-size:clamp(30px,7vw,48px);line-height:1.1;margin:8px 0 10px;letter-spacing:-.03em;font-weight:800}
-.hero p{margin:0;color:var(--sub)}
-.dday{display:inline-flex;align-items:baseline;gap:8px;margin-top:16px;padding:8px 14px;border-radius:999px;
-  background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px}
-.dday b{font-size:18px;font-variant-numeric:tabular-nums}
+/* 상단 색 띠 */
+.band{background:var(--day);color:var(--on-day);transition:background-color .3s ease-in-out;padding-top:env(safe-area-inset-top)}
+.band .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px}
+.band h1{font:400 24px/1 var(--display);margin:0;letter-spacing:.01em}
+.band .meta{font-size:13px;font-weight:600;opacity:.95;display:flex;align-items:center;gap:10px}
+.theme{background:none;border:1.5px solid currentColor;border-radius:8px;min-width:44px;min-height:32px;font-size:12px;font-weight:700;cursor:pointer}
 
-nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--card) 92%,transparent);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);
-  padding-bottom:env(safe-area-inset-bottom)}
-nav.tabs .wrap{display:grid;grid-template-columns:repeat(4,1fr);padding:0 6px}
-nav.tabs button{appearance:none;border:0;background:none;color:var(--sub);font:inherit;font-size:13px;font-weight:600;
-  padding:14px 4px 12px;cursor:pointer;border-top:2px solid transparent;margin-top:-1px}
-nav.tabs button[aria-selected="true"]{color:var(--accent);border-top-color:var(--accent)}
-@media (min-width:820px){
-  body{padding-bottom:40px}
-  nav.tabs{position:sticky;top:0;bottom:auto;border-top:0;border-bottom:1px solid var(--line)}
-  nav.tabs .wrap{display:flex;gap:6px;padding:0 18px}
-  nav.tabs button{padding:14px 16px;border-top:0;border-bottom:2px solid transparent;margin:0 0 -1px;font-size:15px}
-  nav.tabs button[aria-selected="true"]{border-bottom-color:var(--accent)}
-}
+/* 지금 / 다음 */
+.now{padding:20px 0 18px;border-bottom:1px solid var(--line)}
+.now .lab{font-size:13px;font-weight:700;color:var(--day)}
+.now h2{font:400 clamp(30px,8.6vw,44px)/1.12 var(--display);margin:6px 0 6px}
+.now .when{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+.now p{margin:6px 0 0;color:var(--sub);font-size:14.5px}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border-radius:8px;
+  background:var(--link);color:var(--bg);font-weight:700;font-size:14.5px;text-decoration:none;border:0;cursor:pointer}
+.btn.line{background:none;color:var(--link);border:1.5px solid var(--link)}
 
-section.panel{display:none;padding-top:22px}
-section.panel.on{display:block}
-h2{font-size:20px;margin:0 0 4px;letter-spacing:-.02em}
-.lead{color:var(--sub);font-size:14px;margin:0 0 16px}
+/* 날짜 선택 = 노선 */
+.lines{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:14px 0}
+.ln{border:0;background:var(--surface);border-radius:8px;padding:8px 2px 9px;cursor:pointer;text-align:center;line-height:1.25;
+  border-bottom:4px solid var(--c)}
+.ln b{display:block;font:400 19px/1.1 var(--display)}
+.ln i{display:block;font-style:normal;font-size:11px;color:var(--sub);font-weight:600}
+.ln span{display:block;font-size:11.5px;font-variant-numeric:tabular-nums;margin-top:3px}
+.ln[aria-pressed="true"]{background:var(--c);color:#fff}
+.ln[aria-pressed="true"] i{color:#fff;opacity:.9}
+.ln.today b::after{content:" ●";font-size:9px;vertical-align:middle}
 
-.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 18px 14px;margin:0 -18px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;
-  padding:8px 14px;font:inherit;font-size:13px;cursor:pointer;text-align:left;line-height:1.3}
-.chip small{display:block;color:var(--sub);font-size:11px}
-.chip.today{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+/* 하루 */
+.dayhead{padding:6px 0 14px}
+.dayhead h2{font:400 26px/1.15 var(--display);margin:0}
+.dayhead h2 em{font-style:normal;color:var(--day)}
+.wx{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:10px;font-size:14.5px}
+.wx .ico{font-size:26px;line-height:1}
+.wx b{font-size:19px;font-variant-numeric:tabular-nums}
+.wx .rain{font-weight:700}
+.wx .rain.wet{color:var(--todo)}
+.wear{margin:6px 0 0;font-size:14px;color:var(--sub)}
+.wear small{display:block;font-size:11.5px;margin-top:2px}
 
-.day{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
-  margin-bottom:18px;overflow:hidden;scroll-margin-top:70px}
-.day.today{border-color:var(--accent)}
-.day-head{display:flex;gap:14px;align-items:center;padding:18px 18px 14px;border-bottom:1px solid var(--line)}
-.num{flex:none;width:52px;height:52px;border-radius:16px;background:var(--soft);display:grid;place-items:center;
-  font-weight:800;font-size:20px;line-height:1;color:var(--accent)}
-.num small{display:block;font-size:10px;font-weight:700;color:var(--sub);margin-top:3px;text-align:center}
-.day-head h3{margin:0;font-size:18px;letter-spacing:-.02em}
-.day-head p{margin:2px 0 0;font-size:13px;color:var(--sub)}
-.tl{list-style:none;margin:0;padding:6px 18px 12px}
-.tl li{display:grid;grid-template-columns:76px 1fr;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line)}
-.tl li:last-child{border-bottom:0}
-.t{font-variant-numeric:tabular-nums;font-size:13px;font-weight:700;color:var(--sub);padding-top:2px}
-.tl h4{margin:0;font-size:15.5px;font-weight:700;line-height:1.4}
-.tl p{margin:3px 0 0;font-size:13.5px;color:var(--sub)}
-.row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.badge{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px}
-.b-ok{color:var(--ok);background:var(--ok-bg)} .b-todo{color:var(--todo);background:var(--todo-bg)} .b-opt{color:var(--opt);background:var(--opt-bg)}
-.link{font-size:12.5px;font-weight:600;text-decoration:none;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink)}
-.link:hover{border-color:var(--accent);color:var(--accent)}
-.wx{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--soft)}
-.wx .ico{grid-row:1 / span 2;font-size:40px;line-height:1}
-.wx .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
-.wx .sky{font-weight:800;font-size:15.5px}
-.wx .temp{font-size:15px;font-variant-numeric:tabular-nums}
-.wx .temp b{font-size:20px;color:var(--accent)}
-.wx .rain{font-size:13px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
-.wx .rain.wet{color:var(--todo);background:var(--todo-bg);border-color:transparent}
-.wx p{margin:0;font-size:13.5px}
-.wx small{grid-column:1 / -1;color:var(--sub);font-size:11.5px}
-.chip .w{font-size:15px;margin-left:4px}
-.alt{margin:0 18px 14px;border:1px dashed var(--line);border-radius:14px;padding:0 14px;font-size:13.5px}
-.alt summary{cursor:pointer;font-weight:700;padding:12px 0;color:var(--accent)}
-.alt dl{margin:0 0 12px;display:block}
-.alt dt{font-weight:700;color:var(--ink);margin-top:10px}
-.alt dd{margin:2px 0 0;font-weight:400;color:var(--sub)}
-.stay{padding:12px 18px;background:var(--soft);font-size:13.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.stay a{font-weight:600}
+/* 노선도 타임라인 */
+.rail{list-style:none;margin:0;padding:6px 0 0}
+.rail li{position:relative;display:grid;grid-template-columns:58px 1fr;gap:0 36px;padding:0 0 22px}
+.rail li::before{content:"";position:absolute;left:67px;top:0;bottom:0;width:6px;background:var(--day);opacity:.9}
+.rail li:first-child::before{top:10px;border-radius:3px 3px 0 0}
+.rail li:last-child::before{bottom:calc(100% - 16px);border-radius:0 0 3px 3px}
+.rail li::after{content:"";position:absolute;left:62px;top:5px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:4px solid var(--day)}
+.rail li.next::after{background:var(--day);box-shadow:0 0 0 4px color-mix(in srgb,var(--day) 25%,transparent)}
+.rail li.past{opacity:.5}
+.rail .t{font-weight:800;font-size:15.5px;font-variant-numeric:tabular-nums;text-align:right;padding-top:2px;white-space:nowrap}
+.rail h3{margin:0;font-size:17px;font-weight:700;line-height:1.35}
+.rail p{margin:3px 0 0;font-size:14px;color:var(--sub)}
+.tags{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px;align-items:center}
+.st{font-size:12.5px;font-weight:800}
+.st.ok{color:var(--ok)} .st.todo{color:var(--todo)} .st.opt{color:var(--opt)}
+.st::before{content:"■ ";font-size:9px;vertical-align:1px}
+.tags a{font-size:14px;font-weight:600;padding:6px 0;text-underline-offset:3px}
+.stay{display:grid;grid-template-columns:58px 1fr;gap:0 36px;font-size:14px;padding:4px 0 8px}
+.stay b{text-align:right;font-weight:800;color:var(--sub)}
+.alt{margin:8px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px}
+.alt summary{cursor:pointer;font-weight:700;padding:14px 0;color:var(--link);min-height:44px}
+.alt dt{font-weight:700;margin-top:10px} .alt dd{margin:2px 0 0;color:var(--sub)} .alt dl{margin:0 0 14px}
 
-.grid{display:grid;gap:14px}
-@media (min-width:820px){.grid{grid-template-columns:1fr 1fr}.days{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.days .day{margin:0}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;box-shadow:var(--shadow)}
-.card h3{margin:8px 0 4px;font-size:16.5px}
-.card p{margin:0;font-size:13.5px;color:var(--sub)}
-.card .when{font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.02em}
-.btn{display:inline-block;margin-top:12px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:700;
-  font-size:13.5px;padding:9px 14px;border-radius:12px}
-.btn.ghost{background:none;color:var(--ink);border:1px solid var(--line)}
-.card .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
-
-.check{list-style:none;margin:0;padding:0}
-.check li{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:10px}
-.check label{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;cursor:pointer}
-.check input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--accent);flex:none}
-.check b{display:block;font-size:15px;font-weight:700}
-.check span{display:block;font-size:13px;color:var(--sub)}
+/* 목록 탭 */
+section.panel{display:none} section.panel.on{display:block}
+.ptitle{font:400 26px/1.15 var(--display);margin:22px 0 4px}
+.lead{color:var(--sub);font-size:14px;margin:0 0 6px}
+.rows{list-style:none;margin:0;padding:0}
+.rows>li{padding:16px 0;border-bottom:1px solid var(--line)}
+.rows .top{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:700;color:var(--sub);font-variant-numeric:tabular-nums}
+.rows h3{margin:4px 0 2px;font-size:17px}
+.rows p{margin:0;font-size:14px;color:var(--sub)}
+.rows .btn{margin-top:10px}
+.check label{display:flex;gap:14px;align-items:flex-start;cursor:pointer;min-height:44px}
+.check input{width:24px;height:24px;margin:1px 0 0;accent-color:var(--link);flex:none}
+.check b{display:block;font-size:16px} .check span{display:block;font-size:13.5px;color:var(--sub)}
 .check input:checked ~ div b{text-decoration:line-through;color:var(--sub)}
-.note{font-size:12.5px;color:var(--sub);margin-top:14px}
-dl{margin:10px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
-dt{color:var(--sub)} dd{margin:0;font-weight:600}
-footer{color:var(--sub);font-size:12px;padding:26px 0 10px;text-align:center}
+dl.kv{margin:8px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14.5px}
+dl.kv dt{color:var(--sub)} dl.kv dd{margin:0;font-weight:700;font-variant-numeric:tabular-nums}
+footer{color:var(--sub);font-size:12px;padding:24px 0 8px}
+
+/* 탭 */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--bg);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+nav.tabs .wrap{display:grid;grid-template-columns:repeat(4,1fr);padding:0 4px}
+nav.tabs button{border:0;background:none;color:var(--sub);font-size:13.5px;font-weight:700;min-height:56px;cursor:pointer;border-top:3px solid transparent;margin-top:-1px}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-top-color:var(--day)}
+:focus-visible{outline:3px solid var(--link);outline-offset:2px}
+
+@media (min-width:900px){
+  body{padding-bottom:40px}
+  nav.tabs{position:static;border-top:0;border-bottom:1px solid var(--line)}
+  nav.tabs .wrap{display:flex;gap:4px;padding:0 18px}
+  nav.tabs button{padding:0 18px;min-height:48px;font-size:15px;border-top:0;border-bottom:3px solid transparent;margin:0 0 -1px}
+  nav.tabs button[aria-selected="true"]{border-bottom-color:var(--day)}
+  #plan.on{display:grid;grid-template-columns:360px 1fr;gap:0 56px;align-items:start}
+  .side{position:sticky;top:0;padding-top:8px}
+  .lines{grid-template-columns:1fr;gap:6px}
+  .ln{display:grid;grid-template-columns:64px 1fr auto;align-items:center;text-align:left;padding:10px 14px;border-bottom:0;border-left:0;box-shadow:inset 6px 0 0 var(--c)}
+  .ln b{padding-left:6px} .ln span{margin:0}
+  .now{border-bottom:0}
+  .main{padding-top:22px}
+  .rows{max-width:720px}
+}
+@media (prefers-reduced-motion:reduce){.band{transition:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="hero">
-    <div class="eyebrow">OSAKA · KYOTO</div>
-    <h1>오사카·교토<br>4박 5일</h1>
-    <p>2026.11.27 (금) – 12.01 (화) · 3인</p>
-    <div class="dday" id="dday"></div>
-  </header>
-</div>
+<header class="band"><div class="wrap">
+  <h1>오사카·교토 4박 5일</h1>
+  <div class="meta"><span id="dday"></span><button class="theme" id="theme" aria-label="밝기 전환">밝게</button></div>
+</div></header>
 
 <nav class="tabs" aria-label="메뉴"><div class="wrap" role="tablist">
   <button role="tab" data-tab="plan" aria-selected="true">일정</button>
@@ -147,29 +152,28 @@ footer{color:var(--sub);font-size:12px;padding:26px 0 10px;text-align:center}
 
 <main class="wrap">
   <section class="panel on" id="plan">
-    <div class="chips" id="chips"></div>
-    <div class="days" id="days"></div>
+    <div class="side">
+      <div class="now" id="now"></div>
+      <div class="lines" id="lines" role="group" aria-label="날짜 선택"></div>
+    </div>
+    <div class="main" id="day"></div>
   </section>
-
   <section class="panel" id="book">
-    <h2>예약·링크</h2>
+    <h2 class="ptitle">예약·링크</h2>
     <p class="lead">날짜순입니다. 빨간 표시가 아직 해야 하는 예약입니다.</p>
-    <div class="grid" id="bookings"></div>
+    <ul class="rows" id="bookings"></ul>
   </section>
-
   <section class="panel" id="todo">
-    <h2>체크리스트</h2>
+    <h2 class="ptitle">체크리스트</h2>
     <p class="lead">체크 상태는 이 기기에만 저장됩니다.</p>
-    <ul class="check" id="checks"></ul>
+    <ul class="rows check" id="checks"></ul>
   </section>
-
   <section class="panel" id="info">
-    <h2>항공·숙소</h2>
+    <h2 class="ptitle">항공·숙소</h2>
     <p class="lead">예약번호와 정산 금액은 시트에서 확인합니다.</p>
-    <div class="grid" id="infos"></div>
+    <ul class="rows" id="infos"></ul>
   </section>
-
-  <footer>마지막 업데이트 2026.11.24 · 요금과 운영 시간은 방문 전 공식 페이지에서 확인</footer>
+  <footer>2026.11.27 (금) – 12.01 (화) · 3인 · 요금과 운영 시간은 방문 전 공식 페이지에서 확인</footer>
 </main>
 
 <script>
@@ -283,12 +287,72 @@ function outfit(hi,lo,pop){
   const rain = pop>=60?" 우산 필수, 미끄럽지 않은 신발.":pop>=30?" 접이식 우산.":"";
   return top+"."+cold+rain;
 }
-function drawWx(date,loc,live){
-  const box=document.getElementById("wx-"+date), v=WX[loc].d[date]; if(!box||!v) return;
-  const [c,hi,lo,pop]=v, [ico,label]=sky(c), H=Math.round(hi), Lo=Math.round(lo);
-  box.innerHTML=`<div class="ico">${ico}</div><div class="top"><span class="sky">${WX[loc].name} · ${label}</span><span class="temp"><b>${H}°</b> / ${Lo}°</span><span class="rain${pop>=50?" wet":""}">☔ ${pop}%</span></div><p>🧥 ${outfit(hi,lo,pop)}</p><small>${live?"최신 예보 (Open-Meteo), 열 때마다 갱신":"11/24 기준 예보"}</small>`;
-  const chip=document.getElementById("chip-"+date);
-  if(chip) chip.querySelector("small").innerHTML=`<span class="w">${ico}</span> ${H}° / ${Lo}° · ☔${pop}%`;
+const COLORS = ["#D92643","#C4500F","#0E7C6B","#1F6FD6","#9A6B00"]; // 도톤보리 네온, 교토 단풍, 오사카성 청록, 항만 파랑, 귀국 노을
+const $ = (s,r=document)=>r.querySelector(s);
+const el = (tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e};
+const jst = ()=>{const p=Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Tokyo",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date()).map(x=>[x.type,x.value]));return {date:`${p.year}-${p.month}-${p.day}`,min:(+p.hour%24)*60+ +p.minute}};
+const mins = t => {const m=/^(\d{1,2}):(\d{2})$/.exec(t);return m?+m[1]*60+ +m[2]:null};
+const md = d => {const [,m,dd]=d.split("-");return `${+m}/${+dd}`};
+const now = jst(), todayIdx = DAYS.findIndex(d=>d.date===now.date);
+let sel = todayIdx>=0?todayIdx:0;
+const ms = d=>Date.parse(d+"T00:00:00+09:00");
+
+// 다음 일정 찾기
+function nextUp(){
+  if(todayIdx<0){
+    if(ms(now.date)<ms(DAYS[0].date)) return {state:"before",day:0,item:DAYS[0].items[0]};
+    return {state:"after"};
+  }
+  const items=DAYS[todayIdx].items; let cur=null,nx=null;
+  items.forEach(it=>{const m=mins(it.t); if(m==null) return; if(m<=now.min) cur=it; else if(!nx) nx=it;});
+  if(nx) return {state:"during",day:todayIdx,item:nx,cur};
+  if(todayIdx<DAYS.length-1) return {state:"tomorrow",day:todayIdx+1,item:DAYS[todayIdx+1].items[0],cur};
+  return {state:"last",cur};
+}
+const UP = nextUp();
+
+function linkBtns(it,max){return (it.links||[]).slice(0,max).map(([n,u],i)=>`<a class="btn${i?" line":""}" href="${u}" target="_blank" rel="noopener">${n}</a>`).join("")}
+function drawNow(){
+  const box=$("#now"); let h="";
+  if(UP.state==="after"){ h=`<div class="lab">여행 종료</div><h2>수고했어요</h2><p>정산은 시트에서 마무리하면 됩니다.</p><div class="acts"><a class="btn" href="${SHEET}" target="_blank" rel="noopener">시트 열기</a></div>`; }
+  else if(UP.state==="last"){ h=`<div class="lab">오늘 일정 끝</div><h2>${UP.cur?UP.cur.h:"귀국"}</h2><p>조심히 돌아가요.</p>`; }
+  else{
+    const it=UP.item, d=DAYS[UP.day];
+    const lab = UP.state==="before" ? `출발까지 D-${Math.round((ms(d.date)-ms(now.date))/864e5)} · 첫 일정` : UP.state==="tomorrow" ? "내일 첫 일정" : "다음 일정";
+    h=`<div class="lab">${lab}</div><h2>${it.h}</h2><div class="when">${md(d.date)} (${d.dow}) ${it.t}</div><p>${it.p}</p><div class="acts">${linkBtns(it,2)}</div>`;
+    if(UP.state==="during"&&UP.cur) h+=`<p>지금: ${UP.cur.t} ${UP.cur.h}</p>`;
+  }
+  box.innerHTML=h;
+}
+
+// 날씨
+function wxOf(d){const k=d.wx||"osaka", v=WX[k].d[d.date]; if(!v) return null; const [c,hi,lo,pop]=v,[ico,label]=sky(c); return {k,ico,label,hi:Math.round(hi),lo:Math.round(lo),pop,raw:v,live:WX[k].live}}
+function drawLines(){
+  $("#lines").innerHTML="";
+  DAYS.forEach((d,i)=>{
+    const w=wxOf(d), b=el("button","ln"+(i===todayIdx?" today":""),`<b>${md(d.date)}</b><i>${d.dow} · ${i+1}일차</i><span>${w?`${w.ico} ${w.hi}°/${w.lo}° ☔${w.pop}%`:""}</span>`);
+    b.style.setProperty("--c",COLORS[i]); b.setAttribute("aria-pressed",i===sel);
+    b.onclick=()=>{sel=i;render()}; $("#lines").append(b);
+  });
+}
+function drawDay(){
+  const d=DAYS[sel], w=wxOf(d), box=$("#day"); box.innerHTML="";
+  const head=el("div","dayhead",`<h2><em>${sel+1}일차</em> ${d.area}</h2>`+(w?`<div class="wx"><span class="ico">${w.ico}</span><span>${WX[w.k].name} ${w.label}</span><b>${w.hi}° / ${w.lo}°</b><span class="rain${w.pop>=50?" wet":""}">☔ ${w.pop}%</span></div><p class="wear">🧥 ${outfit(...w.raw.slice(1))}<small>${w.live?"최신 예보 (Open-Meteo), 열 때마다 갱신":"11/24 기준 예보"}</small></p>`:""));
+  box.append(head);
+  const ul=el("ul","rail");
+  d.items.forEach(it=>{
+    const m=mins(it.t), isNext=UP.item===it, past=sel===todayIdx&&m!=null&&m<=now.min&&!isNext&&UP.cur!==it;
+    const tags=(it.badge?`<span class="st ${it.badge[0]}">${it.badge[1]}</span>`:"")+(it.links||[]).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n} ↗</a>`).join("");
+    ul.append(el("li",(isNext?"next ":"")+(past?"past":""),`<div class="t">${it.t}</div><div><h3>${it.h}</h3><p>${it.p}</p>${tags?`<div class="tags">${tags}</div>`:""}</div>`));
+  });
+  box.append(ul);
+  if(d.stay) box.append(el("div","stay",`<b>숙소</b><div>${d.stay} · <a href="${map(d.stay)}" target="_blank" rel="noopener">지도 ↗</a></div>`));
+  if(d.alt) box.append(el("details","alt",`<summary>${d.alt.title}</summary><dl>${d.alt.rows.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("")}</dl>`));
+}
+function render(){
+  document.documentElement.style.setProperty("--day",COLORS[sel]);
+  document.querySelector('meta[name="theme-color"]').content=COLORS[sel];
+  drawLines(); drawDay();
 }
 async function loadWx(){
   await Promise.all(Object.keys(WX).map(async k=>{
@@ -299,47 +363,17 @@ async function loadWx(){
       w.live=true;
     }catch(e){}
   }));
-  DAYS.forEach(d=>{const k=d.wx||"osaka"; drawWx(d.date,k,WX[k].live);});
+  render();
 }
 
-const $ = (s,r=document)=>r.querySelector(s);
-const el = (tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e};
-const jstToday = ()=> new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Tokyo"}).format(new Date());
-const today = jstToday();
-
 // D-day
-(()=>{const ms=d=>Date.parse(d+"T00:00:00+09:00"),now=ms(today),s=ms(DAYS[0].date),e=ms(DAYS.at(-1).date);
-  const box=$("#dday");
-  if(now<s) box.innerHTML="출발까지 <b>D-"+Math.round((s-now)/864e5)+"</b>";
-  else if(now<=e) box.innerHTML="여행 <b>"+(Math.round((now-s)/864e5)+1)+"일차</b>";
-  else box.textContent="여행 종료";})();
-
-// 일정
-DAYS.forEach((d,i)=>{
-  const [,m,dd]=d.date.split("-"), isToday=d.date===today, id="day"+(i+1);
-  const chip=el("button","chip"+(isToday?" today":""),`<b>${+m}/${+dd} (${d.dow})</b> · ${i+1}일차<small></small>`); chip.id="chip-"+d.date;
-  chip.onclick=()=>document.getElementById(id).scrollIntoView({block:"start"});
-  $("#chips").append(chip);
-  const card=el("article","day"+(isToday?" today":"")); card.id=id;
-  card.append(el("div","day-head",`<div class="num"><div>${+dd}<small>${+m}월 ${d.dow}</small></div></div><div><h3>${i+1}일차 · ${d.area}</h3><p>${isToday?"오늘":""}</p></div>`));
-  const wx=el("div","wx"); wx.id="wx-"+d.date; card.append(wx);
-  const ul=el("ul","tl");
-  d.items.forEach(it=>{
-    const extras=(it.badge?`<span class="badge b-${it.badge[0]}">${it.badge[1]}</span>`:"")+
-      (it.links||[]).map(([n,u])=>`<a class="link" href="${u}" target="_blank" rel="noopener">${n} ↗</a>`).join("");
-    ul.append(el("li","",`<div class="t">${it.t}</div><div><h4>${it.h}</h4><p>${it.p}</p>${extras?`<div class="row">${extras}</div>`:""}</div>`));
-  });
-  card.append(ul);
-  if(d.alt) card.append(el("details","alt",`<summary>${d.alt.title}</summary><dl>${d.alt.rows.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("")}</dl>`));
-  if(d.stay) card.append(el("div","stay",`<span>숙소 · ${d.stay}</span><a href="${map(d.stay)}" target="_blank" rel="noopener">지도 ↗</a>`));
-  $("#days").append(card);
-});
-
-DAYS.forEach(d=>drawWx(d.date,d.wx||"osaka",false)); loadWx();
+(()=>{const n=ms(now.date),s=ms(DAYS[0].date),e=ms(DAYS.at(-1).date);
+  $("#dday").textContent = n<s?`D-${Math.round((s-n)/864e5)}`:n<=e?`${Math.round((n-s)/864e5)+1}일차`:"여행 종료";})();
+drawNow(); render(); loadWx();
 
 // 예약
-BOOKINGS.forEach(b=>$("#bookings").append(el("div","card",
-  `<div class="top"><span class="when">${b.when}</span><span class="badge b-${b.s[0]}">${b.s[1]}</span></div><h3>${b.h}</h3><p>${b.p}</p><a class="btn" href="${b.a[1]}" target="_blank" rel="noopener">${b.a[0]} ↗</a>`)));
+BOOKINGS.forEach(b=>$("#bookings").append(el("li","",
+  `<div class="top"><span>${b.when}</span><span class="st ${b.s[0]}">${b.s[1]}</span></div><h3>${b.h}</h3><p>${b.p}</p><a class="btn line" href="${b.a[1]}" target="_blank" rel="noopener">${b.a[0]}</a>`)));
 
 // 체크리스트
 const KEY="osaka2026-checks"; let saved={}; try{saved=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
@@ -351,12 +385,12 @@ CHECKS.forEach(([k,h,p])=>{
 
 // 항공·숙소
 [
- `<span class="when">가는 편 · 11/27 (금)</span><h3>ZE615 인천 → 간사이</h3><dl><dt>출발</dt><dd>09:55 인천</dd><dt>도착</dt><dd>11:55 간사이</dd></dl>`,
- `<span class="when">오는 편 · 12/01 (화)</span><h3>ZE614 간사이 → 인천</h3><dl><dt>출발</dt><dd>18:00 간사이</dd><dt>도착</dt><dd>19:50 인천</dd></dl>`,
- `<span class="when">11/27 – 11/28 · 11/29 – 12/01</span><h3>${APA}</h3><p>오사카 난바. 첫날 1박, 교토 다녀와서 2박</p><a class="btn ghost" href="${map(APA)}" target="_blank" rel="noopener">지도 ↗</a>`,
- `<span class="when">11/28 – 11/29</span><h3>${VIS}</h3><p>교토역 인근. 1박</p><a class="btn ghost" href="${map(VIS)}" target="_blank" rel="noopener">지도 ↗</a>`,
- `<span class="when">정산·예약번호</span><h3>여행 플래너 시트</h3><p>공금 원장, 미정산 정산표, 예약번호는 시트에 있습니다. 공유받은 계정으로만 열립니다</p><a class="btn" href="${SHEET}" target="_blank" rel="noopener">시트 열기 ↗</a>`
-].forEach(h=>$("#infos").append(el("div","card",h)));
+ `<div class="top"><span>가는 편 · 11/27 (금)</span></div><h3>ZE615 인천 → 간사이</h3><dl class="kv"><dt>출발</dt><dd>09:55 인천</dd><dt>도착</dt><dd>11:55 간사이</dd></dl>`,
+ `<div class="top"><span>오는 편 · 12/01 (화)</span></div><h3>ZE614 간사이 → 인천</h3><dl class="kv"><dt>출발</dt><dd>18:00 간사이</dd><dt>도착</dt><dd>19:50 인천</dd></dl>`,
+ `<div class="top"><span>11/27 – 11/28 · 11/29 – 12/01</span></div><h3>${APA}</h3><p>오사카 난바. 첫날 1박, 교토 다녀와서 2박</p><a class="btn line" href="${map(APA)}" target="_blank" rel="noopener">지도</a>`,
+ `<div class="top"><span>11/28 – 11/29</span></div><h3>${VIS}</h3><p>교토역 인근. 1박</p><a class="btn line" href="${map(VIS)}" target="_blank" rel="noopener">지도</a>`,
+ `<div class="top"><span>정산·예약번호</span></div><h3>여행 플래너 시트</h3><p>공금 원장, 미정산 정산표, 예약번호는 시트에 있습니다. 공유받은 계정으로만 열립니다</p><a class="btn" href="${SHEET}" target="_blank" rel="noopener">시트 열기</a>`
+].forEach(h=>$("#infos").append(el("li","",h)));
 
 // 탭
 const tabs=[...document.querySelectorAll("nav.tabs button")];
@@ -366,11 +400,15 @@ function show(name,push){
   if(push){history.replaceState(null,"","#"+name);window.scrollTo({top:0})}
 }
 tabs.forEach(b=>b.onclick=()=>show(b.dataset.tab,true));
-const start=location.hash.slice(1); if(tabs.some(b=>b.dataset.tab===start)) show(start);
-addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(tabs.some(b=>b.dataset.tab===h)) show(h)});
-// 여행 중이면 오늘 카드로 이동
-const idx=DAYS.findIndex(d=>d.date===today);
-if(idx>0 && !start) requestAnimationFrame(()=>document.getElementById("day"+(idx+1)).scrollIntoView({block:"start"}));
+const applyHash=()=>{const h=location.hash.slice(1); if(tabs.some(b=>b.dataset.tab===h)) show(h)};
+applyHash(); addEventListener("hashchange",applyHash);
+
+// 밝기: 기기 설정을 따르고, 버튼으로 바꾸면 이 기기에 기억
+const TK="osaka2026-theme", root=document.documentElement, tbtn=$("#theme");
+function setTheme(t){root.dataset.theme=t; tbtn.textContent=t==="dark"?"밝게":"어둡게";}
+let th=null; try{th=localStorage.getItem(TK)}catch(e){}
+setTheme(th||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+tbtn.onclick=()=>{const t=root.dataset.theme==="dark"?"light":"dark"; setTheme(t); try{localStorage.setItem(TK,t)}catch(e){}};
 </script>
 </body>
 </html>
