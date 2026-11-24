@@ -85,6 +85,12 @@ h2{font-size:20px;margin:0 0 4px;letter-spacing:-.02em}
 .b-ok{color:var(--ok);background:var(--ok-bg)} .b-todo{color:var(--todo);background:var(--todo-bg)} .b-opt{color:var(--opt);background:var(--opt-bg)}
 .link{font-size:12.5px;font-weight:600;text-decoration:none;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink)}
 .link:hover{border-color:var(--accent);color:var(--accent)}
+.wx{padding:12px 18px;border-bottom:1px solid var(--line);background:var(--soft);font-size:13.5px}
+.wx b{font-size:15px;font-variant-numeric:tabular-nums}
+.wx .sky{font-weight:700;margin-right:8px}
+.wx .rain{color:var(--sub);margin-left:8px}
+.wx p{margin:4px 0 0;color:var(--ink)}
+.wx small{display:block;margin-top:4px;color:var(--sub);font-size:11.5px}
 .stay{padding:12px 18px;background:var(--soft);font-size:13.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .stay a{font-weight:600}
 
@@ -188,7 +194,7 @@ const DAYS = [
   {t:"19:00", h:"오타로드·애니메이트 닛폰바시", p:"평일 20:00 폐점이라 19:00 전 도착", links:[["지도",map("アニメイト大阪日本橋")],["매장 정보",L.animate]]},
   {t:"20:15", h:"스파게티노 판초 난바점", p:"늦은 저녁. 구글 지도에 영업 중으로 표시됨. 23시까지로 안내", links:[["지도",map("スパゲッティーのパンチョ 大阪なんば店")]]}
  ]},
- {date:"2026-11-28", dow:"토", area:"교토", stay:VIS, items:[
+ {date:"2026-11-28", dow:"토", area:"교토", stay:VIS, wx:"kyoto", items:[
   {t:"07:00", h:"오사카 → 교토역", p:"난바 → 우메다 → JR 신쾌속, 약 1시간. 호텔에 짐 맡기고 JR 나라선으로 2정거장", links:[["경로",L.kyoto]]},
   {t:"08:30", h:"후시미 이나리·센본도리이", p:"중간 전망 지점까지만. 간식은 네자메야(10:00~, 유부초밥·장어덮밥)", links:[["지도",map("伏見稲荷大社")],["네자메야",map("祢ざめ家 伏見稲荷")]]},
   {t:"10:30", h:"게이한으로 기온시조 이동 → 점심", p:"히사고 오야코동(11:30~16:00, 대기 김). 대안은 기온 주변 우동·초밥", links:[["히사고",map("ひさご 京都 下河原")]]},
@@ -209,7 +215,8 @@ const DAYS = [
   {t:"20:30", h:"이치란 라멘 도톤보리", p:"마무리 라멘. 배부르면 11/30 야식으로", links:[["지도",map("一蘭 道頓堀店本館")]]}
  ]},
  {date:"2026-11-30", dow:"월", area:"우메다·오사카항·신세카이 · 주유패스 2일째", stay:APA, items:[
-  {t:"09:30", h:"우메다 스카이빌딩 공중정원", p:"15시 전 입장만 패스 무료", badge:["ok","패스 무료"], links:[["지도",map("梅田スカイビル 空中庭園展望台")]]},
+  {t:"08:00", h:"코메다 커피 모닝", p:"난바센니치마에점, 7:00 개점. 11시까지 음료를 시키면 토스트가 나옵니다", links:[["지도",map("コメダ珈琲店 なんば千日前店")]]},
+  {t:"09:45", h:"우메다 스카이빌딩 공중정원", p:"15시 전 입장만 패스 무료. 옥상은 바람이 차갑습니다", badge:["ok","패스 무료"], links:[["지도",map("梅田スカイビル 空中庭園展望台")]]},
   {t:"11:30", h:"덴포잔 대관람차", p:"오사카항. 평일 10:00~21:00", badge:["ok","패스 무료"], links:[["지도",map("天保山大観覧車")]]},
   {t:"12:00", h:"산타마리아 데이크루즈", p:"11~16시 매시 출발, 15분 전 도착. 기상으로 운휴 가능", badge:["opt","당일 확인"], links:[["공식",L.santa]]},
   {t:"13:30", h:"덴포잔 마켓플레이스 점심", p:"가이유칸은 패스 미포함이라 일정에서 제외", links:[["지도",map("天保山マーケットプレース")]]},
@@ -219,7 +226,7 @@ const DAYS = [
  ]},
  {date:"2026-12-01", dow:"화", area:"난바 → 간사이공항", stay:null, items:[
   {t:"~10:00", h:"체크아웃·짐 보관", p:"여유 있게 준비. 체크아웃 시간은 호텔 안내 확인"},
-  {t:"10:30", h:"Coffee Himawari 브런치", p:"점심을 겸합니다. 호텔 근처. 식사 메뉴와 영업시간 확인", badge:["ok","저장한 곳"], links:[["지도",map("Coffee Himawari 元町 浪速区")]]},
+  {t:"10:30", h:"코메다 커피 브런치", p:"점심을 겸합니다. 난바센니치마에점 또는 난바시티점. 11시 전에 주문하면 모닝 서비스 포함", links:[["센니치마에점",map("コメダ珈琲店 なんば千日前店")],["난바시티점",map("コメダ珈琲店 なんばCITY店")]]},
   {t:"12:00", h:"난바 파크스·다카시마야 마지막 쇼핑", p:"551 호라이 부타만, 면세 수속. 배가 덜 찼으면 무겐라멘 난바나카(11:00~)가 바로 근처", links:[["난바 파크스",map("なんばパークス")],["다카시마야",map("大阪タカシマヤ")],["무겐라멘",map("無限ラーメン 難波中本店")]]},
   {t:"13:45", h:"호텔에서 짐 찾기", p:"난카이 난바역으로 이동"},
   {t:"14:15", h:"라피트로 간사이공항", p:"약 40분. 쇼핑이 길어지면 30분 늦춰도 여유 있음", badge:["todo","예매 필요"], links:[["라피트 예매",L.rapit]]},
@@ -246,8 +253,38 @@ const CHECKS = [
  ["cruise","크루즈 운항 확인","톤보리 리버크루즈, 산타마리아"],
  ["hareruya","하레루야 예약 필요 여부 확인","11/29 17:15, 3명"],
  ["passport","여권·eSIM·엔화","eSIM은 출발 전 설치, 현지에서 활성화"],
+ ["clothes","우산·겉옷 챙기기","11/27~28 비 예보, 11/29~30은 아침 4~6도. 접이식 우산, 경량 패딩, 목도리"],
  ["settle","숙박·eSIM 정산","금액은 시트의 정산표 기준"]
 ];
+
+// 날씨: 11/24 기준 예보를 기본값으로 두고, 열 때마다 최신 예보로 갱신
+const WX = {
+ osaka:{lat:34.6937,lon:135.5023,name:"오사카",d:{"2026-11-27":[53,18.4,7.9,47],"2026-11-28":[53,18.3,10.4,76],"2026-11-29":[2,12.5,5.8,6],"2026-11-30":[0,13.6,3.8,0],"2026-12-01":[1,16.4,5.3,0]}},
+ kyoto:{lat:35.0116,lon:135.7681,name:"교토",d:{"2026-11-27":[51,17.7,6.9,40],"2026-11-28":[81,18.6,7.7,80],"2026-11-29":[51,11.1,3.0,30],"2026-11-30":[0,13.8,1.5,0],"2026-12-01":[0,17.0,3.6,0]}}
+};
+const sky = c => c===0?"맑음":c===1?"대체로 맑음":c===2?"구름 조금":c===3?"흐림":c<50?"안개":c<60?"약한 비":c<70?"비":c<80?"눈":c<83?"소나기":c<90?"눈":"뇌우";
+function outfit(hi,lo,pop){
+  const top = hi>=20?"긴팔 셔츠에 얇은 겉옷":hi>=16?"긴팔에 가디건이나 얇은 자켓":hi>=12?"니트에 코트나 경량 패딩":"두꺼운 니트에 패딩이나 코트";
+  const cold = lo<=5?" 아침·밤에는 목도리나 장갑.":lo<=9?" 밤에는 한 겹 더.":"";
+  const rain = pop>=60?" 우산 필수, 미끄럽지 않은 신발.":pop>=30?" 접이식 우산.":"";
+  return top+"."+cold+rain;
+}
+function drawWx(date,loc,live){
+  const box=document.getElementById("wx-"+date), v=WX[loc].d[date]; if(!box||!v) return;
+  const [c,hi,lo,pop]=v;
+  box.innerHTML=`<span class="sky">${WX[loc].name} · ${sky(c)}</span><b>${Math.round(hi)}°</b> / ${Math.round(lo)}°<span class="rain">비 올 확률 ${pop}%</span><p>${outfit(hi,lo,pop)}</p><small>${live?"최신 예보 (Open-Meteo)":"11/24 기준 예보"}</small>`;
+}
+async function loadWx(){
+  await Promise.all(Object.keys(WX).map(async k=>{
+    try{
+      const w=WX[k], u=`https://api.open-meteo.com/v1/forecast?latitude=${w.lat}&longitude=${w.lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo&forecast_days=16&past_days=7`;
+      const r=await fetch(u); if(!r.ok) return; const x=(await r.json()).daily;
+      x.time.forEach((t,i)=>{ if(w.d[t] && x.temperature_2m_max[i]!=null) w.d[t]=[x.weather_code[i],x.temperature_2m_max[i],x.temperature_2m_min[i],x.precipitation_probability_max[i]??0]; });
+      w.live=true;
+    }catch(e){}
+  }));
+  DAYS.forEach(d=>{const k=d.wx||"osaka"; drawWx(d.date,k,WX[k].live);});
+}
 
 const $ = (s,r=document)=>r.querySelector(s);
 const el = (tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e};
@@ -269,6 +306,7 @@ DAYS.forEach((d,i)=>{
   $("#chips").append(chip);
   const card=el("article","day"+(isToday?" today":"")); card.id=id;
   card.append(el("div","day-head",`<div class="num"><div>${+dd}<small>${+m}월 ${d.dow}</small></div></div><div><h3>${i+1}일차 · ${d.area}</h3><p>${isToday?"오늘":""}</p></div>`));
+  const wx=el("div","wx"); wx.id="wx-"+d.date; card.append(wx);
   const ul=el("ul","tl");
   d.items.forEach(it=>{
     const extras=(it.badge?`<span class="badge b-${it.badge[0]}">${it.badge[1]}</span>`:"")+
@@ -279,6 +317,8 @@ DAYS.forEach((d,i)=>{
   if(d.stay) card.append(el("div","stay",`<span>숙소 · ${d.stay}</span><a href="${map(d.stay)}" target="_blank" rel="noopener">지도 ↗</a>`));
   $("#days").append(card);
 });
+
+DAYS.forEach(d=>drawWx(d.date,d.wx||"osaka",false)); loadWx();
 
 // 예약
 BOOKINGS.forEach(b=>$("#bookings").append(el("div","card",
