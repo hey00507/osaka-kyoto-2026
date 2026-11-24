@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16130f" media="(prefers-color-scheme: dark)">
+<title>오사카·교토 2026</title>
+<style>
+:root{
+  --bg:#f6f1e7; --card:#fffdf8; --ink:#231d16; --sub:#6d6253; --line:#e4dbc9;
+  --accent:#c8402a; --accent-ink:#fff; --soft:#f1e7d6;
+  --ok:#2f7d4f; --ok-bg:#e3f1e7; --todo:#b3401f; --todo-bg:#fbe5dc; --opt:#8a6a12; --opt-bg:#f8edc9;
+  --shadow:0 1px 2px rgba(60,40,10,.06),0 8px 24px -12px rgba(60,40,10,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#16130f; --card:#201c16; --ink:#f1eadc; --sub:#a99c87; --line:#352e24;
+    --accent:#ee6a4d; --accent-ink:#1a0e09; --soft:#2a241b;
+    --ok:#7fd3a0; --ok-bg:#1c3326; --todo:#ff9a7c; --todo-bg:#40211a; --opt:#e6c766; --opt-bg:#3a3016;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;
+  padding-bottom:calc(72px + env(safe-area-inset-bottom));word-break:keep-all}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+
+header.hero{padding:calc(28px + env(safe-area-inset-top)) 0 22px}
+.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--accent);font-weight:700}
+h1{font-size:clamp(30px,7vw,48px);line-height:1.1;margin:8px 0 10px;letter-spacing:-.03em;font-weight:800}
+.hero p{margin:0;color:var(--sub)}
+.dday{display:inline-flex;align-items:baseline;gap:8px;margin-top:16px;padding:8px 14px;border-radius:999px;
+  background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px}
+.dday b{font-size:18px;font-variant-numeric:tabular-nums}
+
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--card) 92%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom)}
+nav.tabs .wrap{display:grid;grid-template-columns:repeat(4,1fr);padding:0 6px}
+nav.tabs button{appearance:none;border:0;background:none;color:var(--sub);font:inherit;font-size:13px;font-weight:600;
+  padding:14px 4px 12px;cursor:pointer;border-top:2px solid transparent;margin-top:-1px}
+nav.tabs button[aria-selected="true"]{color:var(--accent);border-top-color:var(--accent)}
+@media (min-width:820px){
+  body{padding-bottom:40px}
+  nav.tabs{position:sticky;top:0;bottom:auto;border-top:0;border-bottom:1px solid var(--line)}
+  nav.tabs .wrap{display:flex;gap:6px;padding:0 18px}
+  nav.tabs button{padding:14px 16px;border-top:0;border-bottom:2px solid transparent;margin:0 0 -1px;font-size:15px}
+  nav.tabs button[aria-selected="true"]{border-bottom-color:var(--accent)}
+}
+
+section.panel{display:none;padding-top:22px}
+section.panel.on{display:block}
+h2{font-size:20px;margin:0 0 4px;letter-spacing:-.02em}
+.lead{color:var(--sub);font-size:14px;margin:0 0 16px}
+
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 18px 14px;margin:0 -18px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;
+  padding:8px 14px;font:inherit;font-size:13px;cursor:pointer;text-align:left;line-height:1.3}
+.chip small{display:block;color:var(--sub);font-size:11px}
+.chip.today{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+
+.day{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
+  margin-bottom:18px;overflow:hidden;scroll-margin-top:70px}
+.day.today{border-color:var(--accent)}
+.day-head{display:flex;gap:14px;align-items:center;padding:18px 18px 14px;border-bottom:1px solid var(--line)}
+.num{flex:none;width:52px;height:52px;border-radius:16px;background:var(--soft);display:grid;place-items:center;
+  font-weight:800;font-size:20px;line-height:1;color:var(--accent)}
+.num small{display:block;font-size:10px;font-weight:700;color:var(--sub);margin-top:3px;text-align:center}
+.day-head h3{margin:0;font-size:18px;letter-spacing:-.02em}
+.day-head p{margin:2px 0 0;font-size:13px;color:var(--sub)}
+.tl{list-style:none;margin:0;padding:6px 18px 12px}
+.tl li{display:grid;grid-template-columns:76px 1fr;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line)}
+.tl li:last-child{border-bottom:0}
+.t{font-variant-numeric:tabular-nums;font-size:13px;font-weight:700;color:var(--sub);padding-top:2px}
+.tl h4{margin:0;font-size:15.5px;font-weight:700;line-height:1.4}
+.tl p{margin:3px 0 0;font-size:13.5px;color:var(--sub)}
+.row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.badge{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px}
+.b-ok{color:var(--ok);background:var(--ok-bg)} .b-todo{color:var(--todo);background:var(--todo-bg)} .b-opt{color:var(--opt);background:var(--opt-bg)}
+.link{font-size:12.5px;font-weight:600;text-decoration:none;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink)}
+.link:hover{border-color:var(--accent);color:var(--accent)}
+.stay{padding:12px 18px;background:var(--soft);font-size:13.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.stay a{font-weight:600}
+
+.grid{display:grid;gap:14px}
+@media (min-width:820px){.grid{grid-template-columns:1fr 1fr}.days{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.days .day{margin:0}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;box-shadow:var(--shadow)}
+.card h3{margin:8px 0 4px;font-size:16.5px}
+.card p{margin:0;font-size:13.5px;color:var(--sub)}
+.card .when{font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.02em}
+.btn{display:inline-block;margin-top:12px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:700;
+  font-size:13.5px;padding:9px 14px;border-radius:12px}
+.btn.ghost{background:none;color:var(--ink);border:1px solid var(--line)}
+.card .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+
+.check{list-style:none;margin:0;padding:0}
+.check li{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:10px}
+.check label{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;cursor:pointer}
+.check input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--accent);flex:none}
+.check b{display:block;font-size:15px;font-weight:700}
+.check span{display:block;font-size:13px;color:var(--sub)}
+.check input:checked ~ div b{text-decoration:line-through;color:var(--sub)}
+.note{font-size:12.5px;color:var(--sub);margin-top:14px}
+dl{margin:10px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+dt{color:var(--sub)} dd{margin:0;font-weight:600}
+footer{color:var(--sub);font-size:12px;padding:26px 0 10px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">OSAKA · KYOTO</div>
+    <h1>오사카·교토<br>4박 5일</h1>
+    <p>2026.11.27 (금) – 12.01 (화) · 3인</p>
+    <div class="dday" id="dday"></div>
+  </header>
+</div>
+
+<nav class="tabs" aria-label="메뉴"><div class="wrap" role="tablist">
+  <button role="tab" data-tab="plan" aria-selected="true">일정</button>
+  <button role="tab" data-tab="book" aria-selected="false">예약·링크</button>
+  <button role="tab" data-tab="todo" aria-selected="false">체크리스트</button>
+  <button role="tab" data-tab="info" aria-selected="false">항공·숙소</button>
+</div></nav>
+
+<main class="wrap">
+  <section class="panel on" id="plan">
+    <div class="chips" id="chips"></div>
+    <div class="days" id="days"></div>
+  </section>
+
+  <section class="panel" id="book">
+    <h2>예약·링크</h2>
+    <p class="lead">날짜순입니다. 빨간 표시가 아직 해야 하는 예약입니다.</p>
+    <div class="grid" id="bookings"></div>
+  </section>
+
+  <section class="panel" id="todo">
+    <h2>체크리스트</h2>
+    <p class="lead">체크 상태는 이 기기에만 저장됩니다.</p>
+    <ul class="check" id="checks"></ul>
+  </section>
+
+  <section class="panel" id="info">
+    <h2>항공·숙소</h2>
+    <p class="lead">예약번호와 정산 금액은 시트에서 확인합니다.</p>
+    <div class="grid" id="infos"></div>
+  </section>
+
+  <footer>마지막 업데이트 2026.11.24 · 요금과 운영 시간은 방문 전 공식 페이지에서 확인</footer>
+</main>
+
+<script>
+const SHEET = "https://docs.google.com/spreadsheets/d/1FG35TXv2V5pWLXxtmN3X8CcMbSuwK6oTSEZ0XpRaY7A/edit";
+const map = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+const L = {
+  vjw:"https://services.digital.go.jp/visit-japan-web/",
+  rapit:"https://www.nankai.co.jp/en_railway/ticket/rapit",
+  kani:"https://booking.ebica.jp/webrsv/search/e014006701/3148?language=en",
+  animate:"https://www.animate.co.jp/en/shop/nipponbashi/",
+  pancho:"https://naporitanpancho.com/shoplist",
+  tombori:"https://www.ipponmatsu.co.jp/cruise/tombori.html",
+  kyoto:"https://www.google.com/maps/dir/?api=1&origin=Namba+Station&destination=Kyoto+Station&travelmode=transit",
+  inari:"https://inari.jp/en/",
+  kiyomizu:"https://www.kiyomizudera.or.jp/en/visit/special_night_viewing/",
+  castle:"https://www.osakacastle.net/",
+  pass:"https://osaka-amazing-pass.com/en/",
+  santa:"https://suijo-bus.osaka/english/santamaria/"
+};
+const APA = "APA Hotel & Resort Osaka Namba Ekimae Tower";
+const VIS = "Hotel Vischio Kyoto by GRANVIA";
+
+const DAYS = [
+ {date:"2026-11-27", dow:"금", area:"오사카 난바·도톤보리", stay:APA, items:[
+  {t:"09:55", h:"인천 출발 (ZE615)", p:"11:55 간사이공항 도착"},
+  {t:"12:00", h:"입국 심사·수하물·세관", p:"Visit Japan Web QR을 미리 캡처해 두기. 1시간 내외 예상", links:[["Visit Japan Web",L.vjw]]},
+  {t:"13:00", h:"라피트로 난바 이동", p:"약 40분. 도착 후 APA 호텔에 짐 보관", badge:["todo","예매 필요"], links:[["라피트 예매",L.rapit]]},
+  {t:"14:15", h:"난바·에비스바시스지 산책", p:"여유 시간. 입국이 늦어지면 이 시간을 줄입니다"},
+  {t:"15:30", h:"카니도라쿠 도톤보리 본점", p:"3명 예약 확정. 15분 전 도착. 1시간 전까지 취소 가능", badge:["ok","예약 확정"], links:[["지도",map("かに道楽 道頓堀本店")],["예약 화면",L.kani]]},
+  {t:"17:00", h:"도톤보리·글리코 → 옷 구경", p:"신사이바시스지·아메리카무라. 매장을 정하지 않고 걸으면서 구경", links:[["아메리카무라",map("アメリカ村 大阪")]]},
+  {t:"19:00", h:"애니메이트 오사카 닛폰바시", p:"평일 20:00 폐점이라 19:00 전 도착", links:[["지도",map("アニメイト大阪日本橋")],["매장 정보",L.animate]]},
+  {t:"20:15", h:"스파게티노 판초 난바점", p:"늦은 저녁. 피곤하면 11/29·30 저녁으로 옮기기", badge:["opt","영업 여부 확인"], links:[["지도",map("スパゲッティーのパンチョ 大阪なんば店")]]},
+  {t:"선택", h:"톤보리 리버크루즈", p:"약 20분. 당일 현장 매표소에서 시간 지정권 구매", badge:["opt","선택"], links:[["공식 정보",L.tombori]]}
+ ]},
+ {date:"2026-11-28", dow:"토", area:"교토", stay:VIS, items:[
+  {t:"07:00", h:"오사카 → 교토역", p:"난바 → 우메다 → JR 신쾌속. 약 1시간. 비시오 호텔에 짐 보관", links:[["경로",L.kyoto]]},
+  {t:"08:30", h:"후시미 이나리·센본도리이", p:"정상까지 가지 않고 핵심 도리이 구간만. 1.5~2시간", links:[["지도",map("伏見稲荷大社")],["공식",L.inari]]},
+  {t:"11:30", h:"기요미즈데라 주변·산넨자카·니넨자카·기온", p:"점심과 카페 포함해 여유 있게", links:[["산넨자카",map("産寧坂 京都")]]},
+  {t:"16:30", h:"기요미즈데라 도착·대기", p:"토요일 단풍철이라 혼잡. 야간관람 시작 전에 도착"},
+  {t:"17:30", h:"가을 야간 특별관람", p:"예약 불필요, 성인 500엔. 21:00 접수 종료, 21:30 폐문", badge:["ok","예약 불필요"], links:[["지도",map("清水寺")],["공식",L.kiyomizu]]},
+  {t:"20:00", h:"교토역 복귀·저녁·체크인", p:"버스가 혼잡하면 도보와 철도로 우회"}
+ ]},
+ {date:"2026-11-29", dow:"일", area:"교토 → 오사카", stay:APA, items:[
+  {t:"오전", h:"체크아웃 → 오사카 이동", p:"APA 호텔에 짐 보관"},
+  {t:"오후", h:"오사카성·오사카 역사박물관", p:"3~4시간. 관심도에 따라 한쪽 비중 조절", badge:["opt","주유패스 여부 결정"], links:[["지도",map("大阪城天守閣")],["공식",L.castle]]},
+  {t:"저녁", h:"우메다 전망대 또는 난바 야경·식사", p:"둘 중 당일 컨디션에 맞춰 선택"}
+ ]},
+ {date:"2026-11-30", dow:"월", area:"오사카 시내·항만", stay:APA, items:[
+  {t:"오전", h:"덴포잔·산타마리아 크루즈", p:"기상·점검으로 운휴 가능. 당일 편성 확인", badge:["opt","당일 확인"], links:[["지도",map("天保山ハーバービレッジ")],["공식",L.santa]]},
+  {t:"오후", h:"전망대·박물관·항만권 관광", p:"주유패스를 샀다면 대상 시설 위주로"},
+  {t:"저녁", h:"도톤보리 복귀·돈키호테", p:"마지막 쇼핑", links:[["돈키호테 도톤보리",map("ドン・キホーテ 道頓堀店")]]}
+ ]},
+ {date:"2026-12-01", dow:"화", area:"난바 → 간사이공항", stay:null, items:[
+  {t:"오전", h:"체크아웃·짐 보관", p:"여유 있는 아침과 마지막 쇼핑"},
+  {t:"14:00", h:"난바 출발 (라피트)", p:"15:00 전후 간사이공항 도착. 택스리펀·수속", badge:["todo","예매 필요"], links:[["라피트 예매",L.rapit]]},
+  {t:"18:00", h:"간사이 출발 (ZE614)", p:"19:50 인천 도착"}
+ ]}
+];
+
+const BOOKINGS = [
+ {when:"출발 전", h:"Visit Japan Web", p:"입국 심사와 세관 신고를 미리 등록. 3명 각자 등록하고 QR을 캡처", s:["todo","등록 필요"], a:["공식 등록",L.vjw]},
+ {when:"11/27 · 12/01", h:"라피트 (간사이공항 ↔ 난바)", p:"난카이 특급, 전석 지정. 일반석 편도 약 1,490엔으로 안내됨. 11/27 편은 입국 시간을 보고 도착 후 예매하는 편이 안전", s:["todo","예매 필요"], a:["공식 디지털 티켓",L.rapit]},
+ {when:"11/27 15:30", h:"카니도라쿠 도톤보리 본점", p:"3명. Google 예약으로 확정. 1시간 전까지 취소 가능", s:["ok","예약 확정"], a:["예약 화면",L.kani]},
+ {when:"11/27 저녁", h:"톤보리 리버크루즈", p:"전화 예약 없음. 당일 현장 매표소에서 시간 지정권 구매. 요금은 공식 페이지 확인", s:["opt","현장 구매"], a:["공식 정보",L.tombori]},
+ {when:"11/28 아침", h:"오사카 → 교토 (JR 신쾌속)", p:"자유석이라 예약 불필요. 편도 약 820엔, 약 1시간", s:["ok","예약 불필요"], a:["경로 보기",L.kyoto]},
+ {when:"11/28 17:30", h:"기요미즈데라 야간 특별관람", p:"예약 불필요, 성인 500엔. 11/21~11/30 진행", s:["ok","예약 불필요"], a:["공식 정보",L.kiyomizu]},
+ {when:"11/29 – 11/30", h:"오사카 주유패스 2일권", p:"5,000엔, 디지털 티켓 전용. 갈 시설 입장료 합계와 비교한 뒤 결정", s:["opt","구매 여부 미정"], a:["공식 구매",L.pass]},
+ {when:"11/30 오전", h:"산타마리아 크루즈", p:"주유패스 포함 여부와 당일 운항 편성 확인", s:["opt","당일 확인"], a:["공식 정보",L.santa]}
+];
+
+const CHECKS = [
+ ["vjw","Visit Japan Web 등록","3명 각자. QR 화면 캡처까지"],
+ ["rapit","라피트 예매","11/27 공항→난바, 12/01 난바→공항"],
+ ["pass","주유패스 2일권 살지 결정","11/29~30에 갈 시설 정한 뒤"],
+ ["cruise","크루즈 운항 확인","톤보리 리버크루즈, 산타마리아"],
+ ["pancho","스파게티노 판초 영업 여부 확인","영업 종료 예정 표시가 있었음"],
+ ["passport","여권·eSIM·엔화","eSIM은 출발 전 설치, 현지에서 활성화"],
+ ["settle","숙박·eSIM 정산","금액은 시트의 정산표 기준"]
+];
+
+const $ = (s,r=document)=>r.querySelector(s);
+const el = (tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e};
+const jstToday = ()=> new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Tokyo"}).format(new Date());
+const today = jstToday();
+
+// D-day
+(()=>{const ms=d=>Date.parse(d+"T00:00:00+09:00"),now=ms(today),s=ms(DAYS[0].date),e=ms(DAYS.at(-1).date);
+  const box=$("#dday");
+  if(now<s) box.innerHTML="출발까지 <b>D-"+Math.round((s-now)/864e5)+"</b>";
+  else if(now<=e) box.innerHTML="여행 <b>"+(Math.round((now-s)/864e5)+1)+"일차</b>";
+  else box.textContent="여행 종료";})();
+
+// 일정
+DAYS.forEach((d,i)=>{
+  const [,m,dd]=d.date.split("-"), isToday=d.date===today, id="day"+(i+1);
+  const chip=el("button","chip"+(isToday?" today":""),`${+m}/${+dd} (${d.dow})<small>${i+1}일차 · ${d.area.split(" ")[0]}</small>`);
+  chip.onclick=()=>document.getElementById(id).scrollIntoView({block:"start"});
+  $("#chips").append(chip);
+  const card=el("article","day"+(isToday?" today":"")); card.id=id;
+  card.append(el("div","day-head",`<div class="num"><div>${+dd}<small>${+m}월 ${d.dow}</small></div></div><div><h3>${i+1}일차 · ${d.area}</h3><p>${isToday?"오늘":""}</p></div>`));
+  const ul=el("ul","tl");
+  d.items.forEach(it=>{
+    const extras=(it.badge?`<span class="badge b-${it.badge[0]}">${it.badge[1]}</span>`:"")+
+      (it.links||[]).map(([n,u])=>`<a class="link" href="${u}" target="_blank" rel="noopener">${n} ↗</a>`).join("");
+    ul.append(el("li","",`<div class="t">${it.t}</div><div><h4>${it.h}</h4><p>${it.p}</p>${extras?`<div class="row">${extras}</div>`:""}</div>`));
+  });
+  card.append(ul);
+  if(d.stay) card.append(el("div","stay",`<span>숙소 · ${d.stay}</span><a href="${map(d.stay)}" target="_blank" rel="noopener">지도 ↗</a>`));
+  $("#days").append(card);
+});
+
+// 예약
+BOOKINGS.forEach(b=>$("#bookings").append(el("div","card",
+  `<div class="top"><span class="when">${b.when}</span><span class="badge b-${b.s[0]}">${b.s[1]}</span></div><h3>${b.h}</h3><p>${b.p}</p><a class="btn" href="${b.a[1]}" target="_blank" rel="noopener">${b.a[0]} ↗</a>`)));
+
+// 체크리스트
+const KEY="osaka2026-checks"; let saved={}; try{saved=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+CHECKS.forEach(([k,h,p])=>{
+  const li=el("li","",`<label><input type="checkbox" ${saved[k]?"checked":""}><div><b>${h}</b><span>${p}</span></div></label>`);
+  $("input",li).onchange=e=>{saved[k]=e.target.checked;try{localStorage.setItem(KEY,JSON.stringify(saved))}catch(_){}};
+  $("#checks").append(li);
+});
+
+// 항공·숙소
+[
+ `<span class="when">가는 편 · 11/27 (금)</span><h3>ZE615 인천 → 간사이</h3><dl><dt>출발</dt><dd>09:55 인천</dd><dt>도착</dt><dd>11:55 간사이</dd></dl>`,
+ `<span class="when">오는 편 · 12/01 (화)</span><h3>ZE614 간사이 → 인천</h3><dl><dt>출발</dt><dd>18:00 간사이</dd><dt>도착</dt><dd>19:50 인천</dd></dl>`,
+ `<span class="when">11/27 – 11/28 · 11/29 – 12/01</span><h3>${APA}</h3><p>오사카 난바. 첫날 1박, 교토 다녀와서 2박</p><a class="btn ghost" href="${map(APA)}" target="_blank" rel="noopener">지도 ↗</a>`,
+ `<span class="when">11/28 – 11/29</span><h3>${VIS}</h3><p>교토역 인근. 1박</p><a class="btn ghost" href="${map(VIS)}" target="_blank" rel="noopener">지도 ↗</a>`,
+ `<span class="when">정산·예약번호</span><h3>여행 플래너 시트</h3><p>공금 원장, 미정산 정산표, 예약번호는 시트에 있습니다. 공유받은 계정으로만 열립니다</p><a class="btn" href="${SHEET}" target="_blank" rel="noopener">시트 열기 ↗</a>`
+].forEach(h=>$("#infos").append(el("div","card",h)));
+
+// 탭
+const tabs=[...document.querySelectorAll("nav.tabs button")];
+function show(name,push){
+  tabs.forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===name));
+  document.querySelectorAll("section.panel").forEach(s=>s.classList.toggle("on",s.id===name));
+  if(push){history.replaceState(null,"","#"+name);window.scrollTo({top:0})}
+}
+tabs.forEach(b=>b.onclick=()=>show(b.dataset.tab,true));
+const start=location.hash.slice(1); if(tabs.some(b=>b.dataset.tab===start)) show(start);
+addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(tabs.some(b=>b.dataset.tab===h)) show(h)});
+// 여행 중이면 오늘 카드로 이동
+const idx=DAYS.findIndex(d=>d.date===today);
+if(idx>0 && !start) requestAnimationFrame(()=>document.getElementById("day"+(idx+1)).scrollIntoView({block:"start"}));
+</script>
+</body>
+</html>
