@@ -85,12 +85,17 @@ h2{font-size:20px;margin:0 0 4px;letter-spacing:-.02em}
 .b-ok{color:var(--ok);background:var(--ok-bg)} .b-todo{color:var(--todo);background:var(--todo-bg)} .b-opt{color:var(--opt);background:var(--opt-bg)}
 .link{font-size:12.5px;font-weight:600;text-decoration:none;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink)}
 .link:hover{border-color:var(--accent);color:var(--accent)}
-.wx{padding:12px 18px;border-bottom:1px solid var(--line);background:var(--soft);font-size:13.5px}
-.wx b{font-size:15px;font-variant-numeric:tabular-nums}
-.wx .sky{font-weight:700;margin-right:8px}
-.wx .rain{color:var(--sub);margin-left:8px}
-.wx p{margin:4px 0 0;color:var(--ink)}
-.wx small{display:block;margin-top:4px;color:var(--sub);font-size:11.5px}
+.wx{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--soft)}
+.wx .ico{grid-row:1 / span 2;font-size:40px;line-height:1}
+.wx .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.wx .sky{font-weight:800;font-size:15.5px}
+.wx .temp{font-size:15px;font-variant-numeric:tabular-nums}
+.wx .temp b{font-size:20px;color:var(--accent)}
+.wx .rain{font-size:13px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
+.wx .rain.wet{color:var(--todo);background:var(--todo-bg);border-color:transparent}
+.wx p{margin:0;font-size:13.5px}
+.wx small{grid-column:1 / -1;color:var(--sub);font-size:11.5px}
+.chip .w{font-size:15px;margin-left:4px}
 .alt{margin:0 18px 14px;border:1px dashed var(--line);border-radius:14px;padding:0 14px;font-size:13.5px}
 .alt summary{cursor:pointer;font-weight:700;padding:12px 0;color:var(--accent)}
 .alt dl{margin:0 0 12px;display:block}
@@ -271,7 +276,7 @@ const WX = {
  osaka:{lat:34.6937,lon:135.5023,name:"오사카",d:{"2026-11-27":[53,18.4,7.9,47],"2026-11-28":[53,18.3,10.4,76],"2026-11-29":[2,12.5,5.8,6],"2026-11-30":[0,13.6,3.8,0],"2026-12-01":[1,16.4,5.3,0]}},
  kyoto:{lat:35.0116,lon:135.7681,name:"교토",d:{"2026-11-27":[51,17.7,6.9,40],"2026-11-28":[81,18.6,7.7,80],"2026-11-29":[51,11.1,3.0,30],"2026-11-30":[0,13.8,1.5,0],"2026-12-01":[0,17.0,3.6,0]}}
 };
-const sky = c => c===0?"맑음":c===1?"대체로 맑음":c===2?"구름 조금":c===3?"흐림":c<50?"안개":c<60?"약한 비":c<70?"비":c<80?"눈":c<83?"소나기":c<90?"눈":"뇌우";
+const sky = c => c===0?["☀️","맑음"]:c===1?["🌤️","대체로 맑음"]:c===2?["⛅","구름 조금"]:c===3?["☁️","흐림"]:c<50?["🌫️","안개"]:c<60?["🌦️","약한 비"]:c<70?["🌧️","비"]:c<80?["❄️","눈"]:c<83?["🌧️","소나기"]:c<90?["❄️","눈"]:["⛈️","뇌우"];
 function outfit(hi,lo,pop){
   const top = hi>=20?"긴팔 셔츠에 얇은 겉옷":hi>=16?"긴팔에 가디건이나 얇은 자켓":hi>=12?"니트에 코트나 도톰한 자켓":"두꺼운 니트에 코트";
   const cold = lo<=5?" 아침·밤에는 목도리.":lo<=9?" 밤에는 한 겹 더.":"";
@@ -280,8 +285,10 @@ function outfit(hi,lo,pop){
 }
 function drawWx(date,loc,live){
   const box=document.getElementById("wx-"+date), v=WX[loc].d[date]; if(!box||!v) return;
-  const [c,hi,lo,pop]=v;
-  box.innerHTML=`<span class="sky">${WX[loc].name} · ${sky(c)}</span><b>${Math.round(hi)}°</b> / ${Math.round(lo)}°<span class="rain">비 올 확률 ${pop}%</span><p>${outfit(hi,lo,pop)}</p><small>${live?"최신 예보 (Open-Meteo)":"11/24 기준 예보"}</small>`;
+  const [c,hi,lo,pop]=v, [ico,label]=sky(c), H=Math.round(hi), Lo=Math.round(lo);
+  box.innerHTML=`<div class="ico">${ico}</div><div class="top"><span class="sky">${WX[loc].name} · ${label}</span><span class="temp"><b>${H}°</b> / ${Lo}°</span><span class="rain${pop>=50?" wet":""}">☔ ${pop}%</span></div><p>🧥 ${outfit(hi,lo,pop)}</p><small>${live?"최신 예보 (Open-Meteo), 열 때마다 갱신":"11/24 기준 예보"}</small>`;
+  const chip=document.getElementById("chip-"+date);
+  if(chip) chip.querySelector("small").innerHTML=`<span class="w">${ico}</span> ${H}° / ${Lo}° · ☔${pop}%`;
 }
 async function loadWx(){
   await Promise.all(Object.keys(WX).map(async k=>{
@@ -310,7 +317,7 @@ const today = jstToday();
 // 일정
 DAYS.forEach((d,i)=>{
   const [,m,dd]=d.date.split("-"), isToday=d.date===today, id="day"+(i+1);
-  const chip=el("button","chip"+(isToday?" today":""),`${+m}/${+dd} (${d.dow})<small>${i+1}일차 · ${d.area.split(" ")[0]}</small>`);
+  const chip=el("button","chip"+(isToday?" today":""),`<b>${+m}/${+dd} (${d.dow})</b> · ${i+1}일차<small></small>`); chip.id="chip-"+d.date;
   chip.onclick=()=>document.getElementById(id).scrollIntoView({block:"start"});
   $("#chips").append(chip);
   const card=el("article","day"+(isToday?" today":"")); card.id=id;
