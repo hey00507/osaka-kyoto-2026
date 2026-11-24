@@ -91,6 +91,11 @@ h2{font-size:20px;margin:0 0 4px;letter-spacing:-.02em}
 .wx .rain{color:var(--sub);margin-left:8px}
 .wx p{margin:4px 0 0;color:var(--ink)}
 .wx small{display:block;margin-top:4px;color:var(--sub);font-size:11.5px}
+.alt{margin:0 18px 14px;border:1px dashed var(--line);border-radius:14px;padding:0 14px;font-size:13.5px}
+.alt summary{cursor:pointer;font-weight:700;padding:12px 0;color:var(--accent)}
+.alt dl{margin:0 0 12px;display:block}
+.alt dt{font-weight:700;color:var(--ink);margin-top:10px}
+.alt dd{margin:2px 0 0;font-weight:400;color:var(--sub)}
 .stay{padding:12px 18px;background:var(--soft);font-size:13.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .stay a{font-weight:600}
 
@@ -194,7 +199,11 @@ const DAYS = [
   {t:"19:00", h:"오타로드·애니메이트 닛폰바시", p:"평일 20:00 폐점이라 19:00 전 도착", links:[["지도",map("アニメイト大阪日本橋")],["매장 정보",L.animate]]},
   {t:"20:15", h:"스파게티노 판초 난바점", p:"늦은 저녁. 구글 지도에 영업 중으로 표시됨. 23시까지로 안내", links:[["지도",map("スパゲッティーのパンチョ 大阪なんば店")]]}
  ]},
- {date:"2026-11-28", dow:"토", area:"교토", stay:VIS, wx:"kyoto", items:[
+ {date:"2026-11-28", dow:"토", area:"교토", stay:VIS, wx:"kyoto", alt:{title:"비 올 때 대안", rows:[
+  ["약한 비·오락가락","일정 그대로. 후시미 이나리는 센본도리이 구간만 40분으로 줄이고, 기온 가는 길에 산주산겐도(실내, 9:00~16:00, 600엔, 게이한 시치조역)를 넣습니다."],
+  ["오전 내내 많이 올 때","후시미 이나리를 11/29 아침으로 옮깁니다(24시간 개방, 교토역에서 JR 5분). 11/28 오전은 산주산겐도 → 니시키 시장·테라마치 아케이드(지붕 있음) 점심 → 겐닌지(실내에서 정원 감상). 이 경우 11/29 오사카 도착이 늦어져 역사박물관을 생략합니다."],
+  ["저녁까지 올 때","야간관람은 우산 쓰고 그대로. 산넨자카 돌길이 미끄러우니 천천히. 포기하면 교토역 빌딩(식당가·백화점·대계단 조명)으로."],
+  ["판단 시점","당일 07:00 출발 전에 위의 최신 예보로 확인."]]}, items:[
   {t:"07:00", h:"오사카 → 교토역", p:"난바 → 우메다 → JR 신쾌속, 약 1시간. 호텔에 짐 맡기고 JR 나라선으로 2정거장", links:[["경로",L.kyoto]]},
   {t:"08:30", h:"후시미 이나리·센본도리이", p:"중간 전망 지점까지만. 간식은 네자메야(10:00~, 유부초밥·장어덮밥)", links:[["지도",map("伏見稲荷大社")],["네자메야",map("祢ざめ家 伏見稲荷")]]},
   {t:"10:30", h:"게이한으로 기온시조 이동 → 점심", p:"히사고 오야코동(11:30~16:00, 대기 김). 대안은 기온 주변 우동·초밥", links:[["히사고",map("ひさご 京都 下河原")]]},
@@ -253,7 +262,7 @@ const CHECKS = [
  ["cruise","크루즈 운항 확인","톤보리 리버크루즈, 산타마리아"],
  ["hareruya","하레루야 예약 필요 여부 확인","11/29 17:15, 3명"],
  ["passport","여권·eSIM·엔화","eSIM은 출발 전 설치, 현지에서 활성화"],
- ["clothes","우산·겉옷 챙기기","11/27~28 비 예보, 11/29~30은 아침 4~6도. 접이식 우산, 경량 패딩, 목도리"],
+ ["clothes","우산·겉옷 챙기기","11/27~28 비 예보, 11/29~30은 아침 4~6도. 접이식 우산, 코트나 도톰한 자켓, 목도리. 두꺼운 패딩은 불필요"],
  ["settle","숙박·eSIM 정산","금액은 시트의 정산표 기준"]
 ];
 
@@ -264,8 +273,8 @@ const WX = {
 };
 const sky = c => c===0?"맑음":c===1?"대체로 맑음":c===2?"구름 조금":c===3?"흐림":c<50?"안개":c<60?"약한 비":c<70?"비":c<80?"눈":c<83?"소나기":c<90?"눈":"뇌우";
 function outfit(hi,lo,pop){
-  const top = hi>=20?"긴팔 셔츠에 얇은 겉옷":hi>=16?"긴팔에 가디건이나 얇은 자켓":hi>=12?"니트에 코트나 경량 패딩":"두꺼운 니트에 패딩이나 코트";
-  const cold = lo<=5?" 아침·밤에는 목도리나 장갑.":lo<=9?" 밤에는 한 겹 더.":"";
+  const top = hi>=20?"긴팔 셔츠에 얇은 겉옷":hi>=16?"긴팔에 가디건이나 얇은 자켓":hi>=12?"니트에 코트나 도톰한 자켓":"두꺼운 니트에 코트";
+  const cold = lo<=5?" 아침·밤에는 목도리.":lo<=9?" 밤에는 한 겹 더.":"";
   const rain = pop>=60?" 우산 필수, 미끄럽지 않은 신발.":pop>=30?" 접이식 우산.":"";
   return top+"."+cold+rain;
 }
@@ -314,6 +323,7 @@ DAYS.forEach((d,i)=>{
     ul.append(el("li","",`<div class="t">${it.t}</div><div><h4>${it.h}</h4><p>${it.p}</p>${extras?`<div class="row">${extras}</div>`:""}</div>`));
   });
   card.append(ul);
+  if(d.alt) card.append(el("details","alt",`<summary>${d.alt.title}</summary><dl>${d.alt.rows.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join("")}</dl>`));
   if(d.stay) card.append(el("div","stay",`<span>숙소 · ${d.stay}</span><a href="${map(d.stay)}" target="_blank" rel="noopener">지도 ↗</a>`));
   $("#days").append(card);
 });
